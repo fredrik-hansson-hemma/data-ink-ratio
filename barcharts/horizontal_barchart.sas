@@ -81,13 +81,14 @@ ods region;
 proc sgplot data=SASHELP.HEART noborder nowall;
 	title height=14pt "Procedurtid";
 	footnote2 justify=left height=8pt "Diagrambeskrivning: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent non iaculis dui, eget molestie ante. Proin suscipit mauris arcu. Etiam placerat in lacus quis molestie. Integer faucibus tincidunt quam, vel aliquet enim pellentesque sit amet.";
-	hbar Smoking_Status / fillattrs=(color=CX999999) nooutline datalabel;
+	hbar Smoking_Status / fillattrs=(color=CX999999) nooutline;
+	yaxistable Smoking_Status / position=left nostatlabel location=inside;
 	xaxis ;
 run;
 
 ods region;
 proc odstext;
-	p 'Remove the outline around the bars, and change color to something that pops from the background';
+	p 'Numbers "on top" of the bars make them appear taller than they actaully are. Put them on the other side of the bars.';
 run;
 
 
