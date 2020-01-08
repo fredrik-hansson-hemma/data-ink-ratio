@@ -162,6 +162,57 @@ run;
 
 
 
+
+ods region;
+proc sgplot data=SASHELP.HEART noborder nowall;
+	title1 height=14pt justify=left bold "Procedurtid";
+	title2 " ";
+	title3 " ";
+	title4 height=9pt  justify=left "Ablation av" justify=center "Procedurtid antal minuter (median)";
+	footnote2 justify=left height=8pt "Diagrambeskrivning: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent non iaculis dui, eget molestie ante. Proin suscipit mauris arcu. Etiam placerat in lacus quis molestie. Integer faucibus tincidunt quam, vel aliquet enim pellentesque sit amet.";
+	hbar Smoking_Status / fillattrs=(color=CX999999) nooutline categoryorder=respdesc;
+	yaxistable Smoking_Status / position=left nostatlabel location=inside nolabel label=" ";
+	xaxis display=(noline) label="min" labelpos=right label="min";
+	Yaxis display=(noline noticks nolabel) labelpos=top;
+run;
+
+ods region;
+proc odstext;
+	p "Sort order is size of bars to show 'rank'.";
+run;
+
+
+
+
+
+
+proc summary data=sashelp.heart missing completetypes;
+	class Smoking_Status;
+	types Smoking_Status;
+	output out=work.Smoking_Status;
+run;
+
+ods region;
+proc sgplot data=SASHELP.HEART noborder nowall;
+	title1 height=14pt justify=left bold "Procedurtid";
+	title2 " ";
+	title3 " ";
+	title4 height=9pt  justify=left "Ablation av" justify=center "Procedurtid antal minuter (median)";
+	footnote2 justify=left height=8pt "Diagrambeskrivning: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent non iaculis dui, eget molestie ante. Proin suscipit mauris arcu. Etiam placerat in lacus quis molestie. Integer faucibus tincidunt quam, vel aliquet enim pellentesque sit amet.";
+	hbar Smoking_Status / fillattrs=(color=CX999999) nooutline;
+	yaxistable Smoking_Status / position=left nostatlabel location=inside nolabel label=" ";
+	xaxis display=(noline) label="min" labelpos=right label="min";
+	Yaxis display=(noline noticks nolabel) labelpos=top;
+run;
+
+ods region;
+proc odstext;
+	p "Using hbarparm to make it easier to combine with other sorts och graphs.";
+run;
+
+
+
+
 ods layout end;
 ods graphics / reset;
 title;
